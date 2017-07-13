@@ -1,4 +1,5 @@
 #import<iostream>
+#import<math.h>
 using namespace std;
 
 int countDigits(int); // count the number of digits
@@ -20,6 +21,16 @@ int main()
 		int digits = countDigits(num);
 		
 		//printf("digits is : %d\n", digits);
+
+		// create array of input numbers
+		int raw_number[digits];
+		for (int i = 0, j = digits-1; i < digits; i++, j--)
+		{
+			raw_number[j] = num / int(pow(10, i)) % 10;	
+		}
+
+		for (int i = 0; i < digits; i++)
+			printf("%d\n", raw_number[i]);
 		
 		// caluculate row and colunm for one digit
 		int row = 2*bar_size + 3;
@@ -47,10 +58,16 @@ int main()
 		//initilza array with all 0s
 		arrayInitializer(total_rows, total_colunms, lcd_number);
 
-		arrayDisplay(total_rows, total_colunms, lcd_number);
+		//arrayDisplay(total_rows, total_colunms, lcd_number);
 
 
-
+		// change array 0 to 1 where there is no bar
+		// for each digits
+		// loop digits times
+		for (int i = 0; i < digits; i++)
+		{
+			
+		}
 
 		// delete colunms arrays
 		for (int i = 0; i < total_rows; i++)
