@@ -3,6 +3,10 @@ using namespace std;
 
 int countDigits(int); // count the number of digits
 
+void arrayInitializer(int, int, int**); // initializeing 2d array
+
+void arrayDisplay(int, int, int**); // display 2d array
+
 int main()
 {
 	int bar_size;
@@ -31,30 +35,28 @@ int main()
 	//	printf("total_rows is %d\n", total_rows);
 	//	printf("total_colunms is %d\n", total_colunms);
 	
-		// declare 2 dimentional array all elements are zero
+		// dynamically allocate the 2d array for lcd typed number 
 		// 0 : display bar
 		// 1 : don't display bar
-		int lcd_number[total_rows][total_colunms];
-
-		// Init with zeros, maybe another better ways		
+	    int **lcd_number = new int*[total_rows];
 		for (int i = 0; i < total_rows; i++)
 		{
-			for (int j = 0; j < total_colunms; j++)
-			{
-				lcd_number[i][j] = 0;
-			}
+			lcd_number[i] = new int[total_colunms];
 		}
-       /*	
-		for (int i = 0; i < total_rows; i++)
-		{
-			for (int j = 0; j < total_colunms; j++)
-			{
-				printf("%d", lcd_number[i][j]);
-			}
-			printf("\n");
-		}
-		*/
 
+		//initilza array with all 0s
+		arrayInitializer(total_rows, total_colunms, lcd_number);
+
+		arrayDisplay(total_rows, total_colunms, lcd_number);
+
+
+
+
+		// delete colunms arrays
+		for (int i = 0; i < total_rows; i++)
+			delete[] lcd_number[i];
+		// delete row arrays
+		delete[] lcd_number;
 	}
 
 	return 0;
@@ -68,3 +70,29 @@ int countDigits(int num)
 		digits++;
 	return digits;
 }
+
+void arrayInitializer(int row, int colunm, int** arr)
+{
+		// Init with zeros, maybe another better ways		
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < colunm; j++)
+		{
+			arr[i][j] = 0;
+		}
+	}
+}
+void arrayDisplay(int row, int colunm, int** arr)
+{ 
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < colunm; j++)
+		{
+			printf("%d", arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
