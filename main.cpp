@@ -5,8 +5,9 @@ using namespace std;
 int countDigits(int); // count the number of digits
 
 void arrayInitializer(int, int, int**); // initializeing 2d array
-
 void arrayDisplay(int, int, int**); // display 2d array
+
+void lcdConverter(int, int, int, int**);
 
 int main()
 {
@@ -29,8 +30,10 @@ int main()
 			raw_number[j] = num / int(pow(10, i)) % 10;	
 		}
 
+		/*
 		for (int i = 0; i < digits; i++)
 			printf("%d\n", raw_number[i]);
+		*/
 		
 		// caluculate row and colunm for one digit
 		int row = 2*bar_size + 3;
@@ -66,7 +69,7 @@ int main()
 		// loop digits times
 		for (int i = 0; i < digits; i++)
 		{
-			
+			lcdConverter(bar_size, i, raw_number[i], lcd_number);	
 		}
 
 		// delete colunms arrays
@@ -112,4 +115,18 @@ void arrayDisplay(int row, int colunm, int** arr)
 	}
 }
 
+void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
+{
+	int row_begin = 0;
+	int row_end = 2*(bar_size) + 2; // not +3 since it is for index
 
+	int colunm_begin, colunm_end;
+	colunm_begin = (bar_size+2) * digitNumber + digitNumber;
+	colunm_end = colunm_begin + (bar_size+1);
+
+	printf("digit number is %d\n", digitNumber);
+    printf("row_end is %d\n", row_end);
+	printf("colunm_begin is %d\n", colunm_begin);
+	printf("colunm_end is %d\n", colunm_end);
+ 
+}
