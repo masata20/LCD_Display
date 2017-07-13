@@ -50,8 +50,8 @@ int main()
 	//	printf("total_colunms is %d\n", total_colunms);
 	
 		// dynamically allocate the 2d array for lcd typed number 
-		// 0 : display bar
-		// 1 : don't display bar
+		// 1 : display bar 
+		// 0 : don't display bar 
 	    int **lcd_number = new int*[total_rows];
 		for (int i = 0; i < total_rows; i++)
 		{
@@ -71,6 +71,8 @@ int main()
 		{
 			lcdConverter(bar_size, i, raw_number[i], lcd_number);	
 		}
+
+		arrayDisplay(total_rows, total_colunms, lcd_number);
 
 		// delete colunms arrays
 		for (int i = 0; i < total_rows; i++)
@@ -124,9 +126,88 @@ void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 	colunm_begin = (bar_size+2) * digitNumber + digitNumber;
 	colunm_end = colunm_begin + (bar_size+1);
 
-	printf("digit number is %d\n", digitNumber);
-    printf("row_end is %d\n", row_end);
-	printf("colunm_begin is %d\n", colunm_begin);
-	printf("colunm_end is %d\n", colunm_end);
- 
+	//printf("digit number is %d\n", digitNumber);
+    //printf("row_end is %d\n", row_end);
+	//printf("colunm_begin is %d\n", colunm_begin);
+	//printf("colunm_end is %d\n", colunm_end);
+	
+
+	if (raw_value == 0)
+	{
+		
+		// for first row and end row
+		for (int i = 1; i <= bar_size; i++)
+		{
+			arr[row_begin][colunm_begin+i] = 1;
+			arr[row_end][colunm_begin+i] = 1;
+		}
+
+		// for first colunm and ene colunm
+		// first half
+		for (int i = 1; i <= bar_size; i++)
+		{
+			arr[row_begin+i][colunm_begin] = 1;
+			arr[row_begin+i][colunm_end] = 1;
+
+			arr[row_end-i][colunm_begin] = 1;
+			arr[row_end-i][colunm_end] = 1;
+		}
+
+		return;
+	}
+	 
+	if (raw_value == 1)
+	{
+
+		return;
+	}
+
+	if (raw_value == 2)
+	{
+
+		return;
+	}
+
+	if (raw_value == 3)
+	{
+
+		return;
+	}
+
+	if (raw_value == 4)
+	{
+
+		return;
+	}
+
+	if (raw_value == 5)
+	{
+
+		return;
+	}
+
+	if (raw_value == 6)
+	{
+
+		return;
+	}
+
+	if (raw_value == 7)
+	{
+
+		return;
+	}
+
+	if (raw_value == 8)
+	{
+
+		return;
+	}
+
+	if (raw_value == 9)
+	{
+
+		return;
+	}
+
 }
