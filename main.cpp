@@ -121,6 +121,7 @@ void arrayDisplay(int row, int colunm, int** arr)
 void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 {
 	int row_begin = 0;
+	int row_middle = bar_size + 1; // the middle row for lcd format numbers
 	int row_end = 2*(bar_size) + 2; // not +3 since it is for index
 
 	int colunm_begin, colunm_end;
@@ -176,7 +177,26 @@ void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 
 	if (raw_value == 2)
 	{
+		/// for rows
+		for (int i = 1; i <= bar_size; i++)
+		{
+			// first row
+			arr[row_begin][colunm_begin+i] = 2;
+			// middle row
+			arr[row_middle][colunm_begin+i] = 2;
+			// end row
+			arr[row_end][colunm_begin+i] = 2;
+		}
 
+		// for first colunm and ene colunm
+		for (int i = 1; i <= bar_size; i++)
+		{
+			// first half, end column
+			arr[row_begin+i][colunm_end] = 1;
+
+			// second half, first, colunm
+			arr[row_end-i][colunm_begin] = 1;
+		}
 		return;
 	}
 
