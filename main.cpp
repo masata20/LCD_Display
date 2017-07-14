@@ -50,7 +50,8 @@ int main()
 	//	printf("total_colunms is %d\n", total_colunms);
 	
 		// dynamically allocate the 2d array for lcd typed number 
-		// 1 : display bar 
+		// 2 : display "-"
+		// 1 : display "|" 
 		// 0 : don't display bar 
 	    int **lcd_number = new int*[total_rows];
 		for (int i = 0; i < total_rows; i++)
@@ -138,17 +139,18 @@ void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 		// for first row and end row
 		for (int i = 1; i <= bar_size; i++)
 		{
-			arr[row_begin][colunm_begin+i] = 1;
-			arr[row_end][colunm_begin+i] = 1;
+			arr[row_begin][colunm_begin+i] = 2;
+			arr[row_end][colunm_begin+i] = 2;
 		}
 
 		// for first colunm and ene colunm
-		// first half
 		for (int i = 1; i <= bar_size; i++)
 		{
+			// first half
 			arr[row_begin+i][colunm_begin] = 1;
 			arr[row_begin+i][colunm_end] = 1;
 
+			// second half
 			arr[row_end-i][colunm_begin] = 1;
 			arr[row_end-i][colunm_end] = 1;
 		}
@@ -158,6 +160,16 @@ void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 	 
 	if (raw_value == 1)
 	{
+		// for end colunm
+		// first half
+		for ( int i = 1; i <= bar_size; i++)
+		{
+			// first half
+			arr[row_begin+i][colunm_end] = 1;
+			
+			// second half
+			arr[row_end-i][colunm_end] = 1;
+		}
 
 		return;
 	}
