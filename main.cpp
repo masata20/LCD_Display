@@ -177,7 +177,7 @@ void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 
 	if (raw_value == 2)
 	{
-		/// for rows
+		// for rows
 		for (int i = 1; i <= bar_size; i++)
 		{
 			// first row
@@ -202,13 +202,39 @@ void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 
 	if (raw_value == 3)
 	{
+		// for rows
+		for (int i = 1; i <= bar_size; i++)
+		{
+			// first row
+			arr[row_begin][colunm_begin+i] = 2;
+			// middle row
+			arr[row_middle][colunm_begin+i] = 2;
+			// end row
+			arr[row_end][colunm_begin+i] = 2;
+		}
+
+      	// for end colunm
+		for (int i = 1; i <= bar_size; i++)
+		{
+			// first half, end column
+			arr[row_begin+i][colunm_end] = 1;
+
+			// second half, first, colunm
+			arr[row_end-i][colunm_end] = 1;
+		}
+
 
 		return;
 	}
 
 	if (raw_value == 4)
 	{
-
+		// for rows
+		for (int i = 1; i <= bar_size; i++)
+		{
+			// middle row
+			arr[row_middle][colunm_begin+i] = 2;
+		}
 		return;
 	}
 
