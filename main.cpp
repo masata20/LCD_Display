@@ -1,33 +1,38 @@
 #import<iostream>
-#import<math.h>
+#import<cstring> // for strlen
 using namespace std;
 
 int countDigits(int); // count the number of digits
 
 void arrayInitializer(int, int, int**); // initializeing 2d array
 void arrayDisplay(int, int, int**); // display 2d array
-
+void lcdDisplay(int, int, int**); // display lcd from 2d array
 void lcdConverter(int, int, int, int**);
 
 int main()
 {
 	int bar_size;
+
+	// to read leading 0
+	char raw_num[50];
 	int num;
 	
-	while (scanf("%d%d", &bar_size, &num), bar_size)
+	// no & for num
+	while (scanf("%d%s", &bar_size, raw_num), bar_size)
 	{
 		//printf("bar_size is %d, num is %d\n", bar_size, num);
 
 		// determine the number of digits in input number
-		int digits = countDigits(num);
+		int digits = strlen(raw_num);
 		
 		//printf("digits is : %d\n", digits);
 
-		// create array of input numbers
+		// create array of input numbers with int data type
+		// maybe unnecessary
 		int raw_number[digits];
-		for (int i = 0, j = digits-1; i < digits; i++, j--)
+		for (int i = 0; i < digits; i++)
 		{
-			raw_number[j] = num / int(pow(10, i)) % 10;	
+			raw_number[i] = raw_num[i] - '0'; // to conver char to integer data type
 		}
 
 		/*
@@ -63,17 +68,19 @@ int main()
 		arrayInitializer(total_rows, total_colunms, lcd_number);
 
 		//arrayDisplay(total_rows, total_colunms, lcd_number);
-
+       
 
 		// change array 0 to 1 where there is no bar
 		// for each digits
 		// loop digits times
 		for (int i = 0; i < digits; i++)
 		{
+			// give raw numbers by changing char to integer
 			lcdConverter(bar_size, i, raw_number[i], lcd_number);	
 		}
 
-		arrayDisplay(total_rows, total_colunms, lcd_number);
+	//	arrayDisplay(total_rows, total_colunms, lcd_number);
+        lcdDisplay(total_rows, total_colunms, lcd_number);
 
 		// delete colunms arrays
 		for (int i = 0; i < total_rows; i++)
@@ -117,6 +124,24 @@ void arrayDisplay(int row, int colunm, int** arr)
 		printf("\n");
 	}
 }
+void lcdDisplay(int row, int colunm, int** arr)
+{ 
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < colunm; j++)
+		{
+			if (arr[i][j] == 0)
+				printf(" ");
+			if (arr[i][j] == 1) 
+				printf("|");
+			if (arr[i][j] == 2)
+				printf("-");	
+		}
+		printf("\n");
+	}
+}
+
 
 void lcdConverter(int bar_size, int digitNumber, int raw_value, int** arr)
 {
