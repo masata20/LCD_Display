@@ -87,6 +87,8 @@ int main()
 			delete[] lcd_number[i];
 		// delete row arrays
 		delete[] lcd_number;
+
+		printf("\n");
 	}
 
 	return 0;
